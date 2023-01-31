@@ -14,7 +14,6 @@ services:
 
   back:
     build: ./backend
-    command: sh -c "cd back/Database && dotnet ef database update"
     networks:
       - network
     depends_on:
