@@ -14,7 +14,6 @@ services:
 
   back:
     build: ./backend
-    command: dotnet ef database update
     networks:
       - network
     depends_on:

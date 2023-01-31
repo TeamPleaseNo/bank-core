@@ -18,6 +18,10 @@ RUN dotnet restore
 # copy everything else and build app
 COPY --from=copy /back/bank-backend/Backend-Bank/. ./Backend-Bank/
 COPY --from=copy /back/bank-backend/Database/. ./Database/
+
+WORKDIR /source/Database
+RUN dotnet ef database update
+
 WORKDIR /source/Backend-Bank
 RUN dotnet publish -c Release -o /app --no-restore
 
