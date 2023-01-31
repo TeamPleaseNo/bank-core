@@ -4,7 +4,9 @@ on:
   workflow_dispatch:
 
 jobs:
+
   build:
+
      runs-on: ubuntu-latest
 
     steps:
@@ -15,7 +17,9 @@ jobs:
         run: docker-compose up -d
 
   connect:
+
     steps:
+    
       - name: executing remote ssh commands using ssh key
         uses: appleboy/ssh-action@v0.1.7
         with:
