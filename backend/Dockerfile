@@ -2,6 +2,7 @@ FROM ubuntu as copy
 RUN apt-get update
 RUN apt-get install -y git
 WORKDIR /back
+ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 RUN git clone https://github.com/TeamPleaseNo/bank-backend.git
 
 # https://hub.docker.com/_/microsoft-dotnet
@@ -19,9 +20,6 @@ RUN dotnet restore
 COPY --from=copy /back/bank-backend/Backend-Bank/. ./Backend-Bank/
 COPY --from=copy /back/bank-backend/Database/. ./Database/
 
-WORKDIR /source/Database
-RUN dotnet ef database update
-
 WORKDIR /source/Backend-Bank
 RUN dotnet publish -c Release -o /app --no-restore
 
@@ -29,4 +27,5 @@ RUN dotnet publish -c Release -o /app --no-restore
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /app
 COPY --from=build /app ./
+COPY --from=copy /back/bank-backend ./back
 ENTRYPOINT dotnet Backend-Bank.dll

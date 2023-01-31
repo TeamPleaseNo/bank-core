@@ -2,6 +2,7 @@ FROM ubuntu as copy
 RUN apt-get update
 RUN apt-get install -y git
 WORKDIR /
+ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 RUN git clone https://github.com/TeamPleaseNo/frontend.git
 
 FROM node:lts-alpine as build-stage
