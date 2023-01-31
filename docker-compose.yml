@@ -14,7 +14,6 @@ services:
 
   back:
     build: ./backend
-    command: sh -c "ls"
     networks:
       - network
     depends_on:
