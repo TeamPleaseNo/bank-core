@@ -5,9 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -17,19 +15,21 @@ jobs:
         name: Build the stack
         run: docker-compose up -d
 
-  # connect:
+  connect:
+    needs: build
 
-  #   steps:
-    
-  #     - name: executing remote ssh commands using ssh key
-  #       uses: appleboy/ssh-action@v0.1.7
-  #       with:
-  #         host: ${{ secrets.SSH_HOST }}
-  #         username: ${{ secrets.SSH_USER }}
-  #         key: ${{ secrets.SSH_PRIVATE_KEY }}
-  #         port: ${{ secrets.SSH_PORT }}
-  #         script: |
-  #           cd /bank-core
-  #           docker-compose stop
-  #           git pull
-  #           docker-compose up
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd /bank-core
+            docker-compose stop
+            git pull
+            docker-compose up
