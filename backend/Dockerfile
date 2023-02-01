@@ -25,6 +25,11 @@ RUN dotnet publish -c Release -o /app --no-restore
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
+FROM mcr.microsoft.com/vscode/devcontainers/dotnet:0-7.0
+RUN dotnet tool install -g dotnet-ef
+ENV PATH $PATH:/root/.dotnet/tools
+
 WORKDIR /app
 COPY --from=build /app ./
+COPY --from=copy /back/bank-backend/Database/. ./Database/
 ENTRYPOINT dotnet Backend-Bank.dll
