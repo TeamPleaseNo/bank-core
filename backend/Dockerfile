@@ -21,11 +21,12 @@ COPY --from=copy /back/bank-backend/Backend-Bank/. ./Backend-Bank/
 COPY --from=copy /back/bank-backend/Database/. ./Database/
 
 WORKDIR /source/Backend-Bank
-RUN dotnet publish -c Release -o /app --no-restore
+RUN dotnet build -c Release -o /app --no-restore
+RUN dotnet publish -c Release -o /app --no-restore --no-build
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
-FROM mcr.microsoft.com/vscode/devcontainers/dotnet:0-7.0
+FROM mcr.microsoft.com/vscode/devcontainers/dotnet
 RUN dotnet tool install -g dotnet-ef
 ENV PATH $PATH:/root/.dotnet/tools
 

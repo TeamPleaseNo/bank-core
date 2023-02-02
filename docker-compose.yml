@@ -14,7 +14,7 @@ services:
 
   back:
     build: ./backend
-    command: sh -c "cd /app/Database && dutnet build && dotnet ef database update -v --no-color --no-build"
+    command: sh -c "cd /app/Database && dotnet build && dotnet ef database update -v --no-color --no-build"
     networks:
       - network
     depends_on:
