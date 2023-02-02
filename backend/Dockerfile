@@ -21,7 +21,7 @@ COPY --from=copy /back/bank-backend/Backend-Bank/. ./Backend-Bank/
 COPY --from=copy /back/bank-backend/Database/. ./Database/
 
 WORKDIR /source/Backend-Bank
-RUN dotnet publish -c Release -o /app --no-restore
+RUN dotnet publish -c Release -o /app --no-build
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
