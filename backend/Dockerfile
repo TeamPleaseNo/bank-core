@@ -21,7 +21,7 @@ COPY --from=copy /back/bank-backend/Backend-Bank/. ./Backend-Bank/
 COPY --from=copy /back/bank-backend/Database/. ./Database/
 
 WORKDIR /source/Backend-Bank
-RUN dotnet build -c Release -o /app --no-restore
+RUN dotnet build -c Release -o . --no-restore
 RUN dotnet publish -c Release -o /app --no-restore --no-build
 
 # final stage/image
