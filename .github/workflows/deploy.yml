@@ -30,6 +30,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd /bank-core
+            chmod +x ./prepare.sh
             docker-compose stop
             git pull
             ./build_back.sh
