@@ -16,4 +16,4 @@ retry() {
     done
 }
 
-retry 3 timeout 120 docker-compose build back
+retry 3 timeout 180 docker-compose build back

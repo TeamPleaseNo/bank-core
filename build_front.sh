@@ -16,4 +16,4 @@ retry() {
     done
 }
 
-retry 3 timeout 180 docker-compose build frontend
+retry 3 timeout 360 docker-compose build frontend
